@@ -13,27 +13,22 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
 ])
 
-#url = 'https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt'
-#filename = 'imagenet_classes.txt'
-#urllib.request.urlretrieve(url, filename)
+url = 'https://raw.githubusercontent.com/pytorch/hub/master/imagenet_classes.txt'
+filename = 'imagenet_classes.txt'
+urllib.request.urlretrieve(url, filename)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-model = models.mobilenet_v2(pretrained = False)
-num_classes = 21  # New number of classes
-model.classifier[1] = nn.Linear(model.last_channel, num_classes)
-weights_path = 'mobilenetv2_pascalvoc.pth'
-state_dict = torch.load(weights_path, map_location=torch.device('cpu'))
-model.load_state_dict(state_dict, strict=False)
+model = models.mobilenet_v2(pretrained = True)
 model.to(device)
 model.eval()
 
-cap = cv.VideoCapture("video_test.webm")
+cap = cv.VideoCapture("videoplayback.mp4")
 
 frameWidth = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
 frameHeight = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 
-area_size = (frameWidth + frameHeight) / 5
+area_size = (frameWidth + frameHeight)
 
 fgbg = cv.createBackgroundSubtractorMOG2(history=500, varThreshold=50, detectShadows=0)
 
