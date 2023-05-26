@@ -20,9 +20,13 @@
 
 ![image](https://github.com/Kyu0102/Final_Project/assets/128031528/af67b0d0-09e0-4f75-9044-182830f3e90b)
 
-위와 같이 움직이는 물체를 크롭한 후 이를 MobileNetV2에 입력으로 넣어 inference 결과를 box위에 글자로 표시한다.
+-위와 같이 움직이는 물체를 크롭한 후 이를 MobileNetV2에 입력으로 넣어 inference 결과를 box위에 글자로 표시한다.
 
-parameter가 굉장히 적은 MobileNetV2를 사용하고 inference 횟수를 real-time이 아닌 어느정도 딜레이를 줌으로써 CPU 환경에서도 real-time처럼 작동한다.
+-parameter가 굉장히 적은 MobileNetV2를 사용하고 inference 횟수를 real-time이 아닌 어느정도 딜레이를 줌으로써 CPU 환경에서도 real-time처럼 작동한다.
+
+-원래는 CIFAR100을 학습해 inference를 수행할 예정이었으나, CIFAR100으로 학습한 모델은 classification 성능이 이보다도 떨어져서 이는 보류하기로 했다.
+
+-현재 사용하는 데이터셋은 ImageNet이다.
 
 -Drawback-
 
