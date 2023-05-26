@@ -33,3 +33,7 @@
 1. classification 성능이 별로라 인식이 불안정하다.
 2. 움직이는 물체에 대해 box를 만들 때 너무 작은 움직임에 대해서는 box를 만들지 못한다.
 3. 움직이는 물체에 대해 1개의 box만 만들어야 하나, mask끼리 연결되지 않아 여러 개의 box를 만드는 경우가 있다.
+
+-Reference
+
+1. https://webnautes.tistory.com/1248
