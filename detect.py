@@ -23,12 +23,12 @@ model = models.mobilenet_v2(pretrained = True)
 model.to(device)
 model.eval()
 
-cap = cv.VideoCapture("videoplayback.mp4")
+cap = cv.VideoCapture("test_video.mp4")
 
 frameWidth = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
 frameHeight = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
 
-area_size = (frameWidth + frameHeight)
+area_size = (frameWidth + frameHeight)/2
 
 fgbg = cv.createBackgroundSubtractorMOG2(history=500, varThreshold=50, detectShadows=0)
 
@@ -48,21 +48,22 @@ while(cap.isOpened()):
 
         if area > area_size:
             cv.rectangle(frame, (x, y), (x + width, y + height), (0, 0, 255))
-            crop_img = frame[y:y+height, x:x+width]
-            image = Image.fromarray(crop_img)
-
-            img_transformed = transform(image)
-            input = img_transformed.unsqueeze(0)
-            output = model(input.to(device))
+            count += 1
+            if count % 4 == 0:
+                crop_img = frame[y:y+height, x:x+width]
+                image = Image.fromarray(crop_img)
+                img_transformed = transform(image)
+                input = img_transformed.unsqueeze(0)
+                output = model(input.to(device))
             
-            score, predicted = torch.max(output.data, 1)
+                score, predicted = torch.max(output.data, 1)
             
-            with open('imagenet_classes.txt') as f:
-                classes = [line.strip() for line in f.readlines()]
+                with open('imagenet_classes.txt') as f:
+                    classes = [line.strip() for line in f.readlines()]
 
-            class_label = classes[predicted.item()]
+                class_label = classes[predicted.item()]
+                
             font = cv.FONT_HERSHEY_SIMPLEX
-            
             cv.putText(frame, class_label, (x,y), font, 0.5, (0,255,0), 1, cv.LINE_AA)
 
     cv.imshow('frame',frame)
