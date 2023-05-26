@@ -21,6 +21,7 @@
 ![image](https://github.com/Kyu0102/Final_Project/assets/128031528/af67b0d0-09e0-4f75-9044-182830f3e90b)
 
 위와 같이 움직이는 물체를 크롭한 후 이를 MobileNetV2에 입력으로 넣어 inference 결과를 box위에 글자로 표시한다.
+
 parameter가 굉장히 적은 MobileNetV2를 사용하고 inference 횟수를 real-time이 아닌 어느정도 딜레이를 줌으로써 CPU 환경에서도 real-time처럼 작동한다.
 
 -Drawback-
