@@ -1,8 +1,11 @@
 # Final_Project
 
 제목
+
 움직임 감지기
+
 설명
+
 영상 속 물체의 움직임을 감지한다. 이때 움직임을 감지한 부분을 crop해 trained CNN model를 활용해 classification을 수행한다.
 이를 통해 감지한 움직인 물체가 무엇인지를 확인한다.
 
